@@ -3,49 +3,40 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CSE Farewell Invitation</title>
+<title>CSE Farewell Party</title>
 
 <style>
 body {
   margin: 0;
   font-family: 'Segoe UI', sans-serif;
-  background: linear-gradient(to right, #e3f2fd, #ffffff);
+  background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+  color: white;
   text-align: center;
-  color: #333;
 }
 
 .container {
   padding: 40px 20px;
+  animation: fadeIn 2s ease-in;
 }
 
 h1 {
-  font-size: 40px;
-  color: #0d47a1;
-}
-
-h2 {
-  font-size: 28px;
-  margin-top: 10px;
-}
-
-p {
-  font-size: 18px;
+  font-size: 42px;
+  margin-bottom: 10px;
 }
 
 .card {
-  background: white;
-  padding: 25px;
+  background: rgba(255,255,255,0.1);
+  padding: 20px;
   margin: 20px auto;
   border-radius: 12px;
   max-width: 500px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  backdrop-filter: blur(10px);
 }
 
 .button {
   display: inline-block;
   padding: 12px 25px;
-  margin-top: 15px;
-  background: #0d47a1;
+  background: #ff9800;
   color: white;
   text-decoration: none;
   border-radius: 8px;
@@ -53,13 +44,19 @@ p {
 }
 
 .button:hover {
-  background: #1565c0;
+  background: #ffa726;
 }
 
-footer {
-  margin-top: 30px;
-  font-size: 14px;
-  color: gray;
+@keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
+/* Countdown */
+#countdown {
+  font-size: 24px;
+  margin-top: 10px;
+  color: #ffd54f;
 }
 </style>
 </head>
@@ -69,12 +66,11 @@ footer {
 <div class="container">
 
   <h1>🎓 CSE Farewell Party</h1>
-  <h2>Tirumala Engineering College</h2>
+  <p>Tirumala Engineering College</p>
 
   <div class="card">
-    <p><strong>📅 Date:</strong> April 13</p>
-    <p><strong>⏰ Time:</strong> 9:00 AM</p>
-    <p><strong>📍 Venue:</strong> CSE Seminar Hall</p>
+    <p>📅 April 13 | ⏰ 9:00 AM</p>
+    <p>📍 CSE Seminar Hall</p>
   </div>
 
   <div class="card">
@@ -82,20 +78,45 @@ footer {
   </div>
 
   <div class="card">
-    <h3>🎉 You're Invited!</h3>
-    <p>Join us to celebrate memories, friendships, and new beginnings.</p>
+    <h3>⏳ Countdown</h3>
+    <div id="countdown"></div>
+  </div>
 
-    <!-- RSVP Button -->
+  <div class="card">
     <a class="button" href="https://forms.gle/" target="_blank">
       RSVP Now
     </a>
   </div>
 
-  <footer>
-    Organized by 3rd Year CSE Students ❤️
-  </footer>
-
 </div>
+
+<!-- 🎶 Background Music -->
+<audio autoplay loop>
+  <source src="https://www.bensound.com/bensound-music/bensound-sunny.mp3" type="audio/mp3">
+</audio>
+
+<!-- ⏳ Countdown Script -->
+<script>
+const eventDate = new Date("April 13, 2026 09:00:00").getTime();
+
+const timer = setInterval(function() {
+  const now = new Date().getTime();
+  const distance = eventDate - now;
+
+  const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((distance / (1000 * 60 * 60)) % 24);
+  const minutes = Math.floor((distance / 1000 / 60) % 60);
+  const seconds = Math.floor((distance / 1000) % 60);
+
+  document.getElementById("countdown").innerHTML =
+    days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+
+  if (distance < 0) {
+    clearInterval(timer);
+    document.getElementById("countdown").innerHTML = "🎉 Event Started!";
+  }
+}, 1000);
+</script>
 
 </body>
 </html>
